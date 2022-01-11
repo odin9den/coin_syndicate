@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Syndicate</title>
+    <style type="text/css">
+        /* reset */
+        article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:0 0.67em 0}h2{font-size:1.5em;margin:0 0 .83em 0}h3{font-size:1.17em;margin:1em 0}h4{font-size:1em;margin:1.33em 0}h5{font-size:.83em;margin:1.67em 0}h6{font-size:.75em;margin:2.33em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000}p,pre{margin:1em 0}code,kbd,pre,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}q{quotes:none}q:before,q:after{content:'';content:none}small{font-size:75%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none}img{border:0;-ms-interpolation-mode:bicubic}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal;*margin-left:-7px}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle}button,input{line-height:normal}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;*overflow:visible}button[disabled],input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}
+        
+        /* custom client-specific styles including styles for different online clients */
+        .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* hotmail / outlook.com */
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div{line-height:100%;} /* hotmail / outlook.com */
+        table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Outlook */
+        #outlook a{padding:0;} /* Outlook */
+        img{-ms-interpolation-mode: bicubic;display:block;outline:none; text-decoration:none;} /* IExplorer */
+        body, table, td, p, a, li, blockquote{-ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; font-weight:normal!important;}
+        .ExternalClass td[class="ecxflexibleContainerBox"] h3 {padding-top: 10px !important;} /* hotmail */
+        
+        @media only screen and (max-width: 800px){
+            table[class="responsive-table-wrapper"]{
+                width: 640px !important;
+            }
+        }
+        @media only screen and (max-width: 640px){
+            table[class="responsive-table-wrapper"]{
+                width: calc(100%) !important;
+            }
+            td[class="responsive-td"],
+            td[class="responsive-td"] table{
+                width: 100%;
+            }
+            td[class="responsive-td"]:first-child{
+                width: 50% !important;
+            }
+            table[class="responsive-container"]{
+                width: calc(100% - 40px) !important;
+            }
+            table[class="responsive-table"]{
+                width: 100% !important;
+            }
+            table[class="greatings"]{
+                border-radius: 10px !important;
+            }
+            td[class="arrow"]{
+                display: none;
+            }
+            
+            td[class="title"]{
+                white-space: nowrap;
+            }
+            td[class="text"]{
+                font-size: 10px !important;
+            }
+        }
+        @media only screen and (max-width: 420px){
+            td[class="main-title"]{
+                font-size: 24px !important;
+            }
+            td[class="title"]{
+                font-size: 18px !important;
+            }
+            table[class="square-image"],
+            table[class="square-image"] img{
+                width: 120px !important;
+                height: 120px !important;
+            }
+            table[class="rectangle-image"],
+            table[class="rectangle-image"] img{
+                width: 120px !important;
+                height: 190px !important;
+            }
+        }
+        @media only screen and (max-width: 800px){
+            table.responsive-table-wrapper{
+                width: 640px !important;
+            }
+        }
+        @media only screen and (max-width: 640px){
+            .text{
+                font-size: 10px !important;
+            }
+            .title{
+                white-space: nowrap;
+            }
+            table.responsive-table-wrapper{
+                width: calc(100%) !important;
+            }
+            td.responsive-td,
+            td.responsive-td table{
+                width: 100%;
+            }
+            .responsive-td:first-child{
+                width: 50% !important;
+            }
+            table.responsive-container{
+                width: calc(100% - 40px) !important;
+            }
+            table.responsive-table{
+                width: 100% !important;
+            }
+            table.greatings{
+                border-radius: 10px !important;
+            }
+            td.arrow{
+                display: none;
+            }
+        }
+        @media only screen and (max-width: 420px){
+            .main-title{
+                font-size: 24px !important;
+            }
+            .title{
+                font-size: 18px !important;
+            }
+            .square-image, 
+            .square-image img{
+                width: 120px !important;
+                height: 120px !important;
+            }
+            .rectangle-image,
+            .rectangle-image img{
+                width: 120px !important;
+                height: 190px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+    <!-- wrapping table for alignmenet-->
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; background-color:#ffffff;">
+        <tbody>
+            <tr>
+                <td align="center">
+                    <!-- coin_syndicate logo -->
+                    <table class="responsive-table-wrapper" cellpadding="0" cellspacing="0" border="0" width="800">
+                        <tbody>
+                            <tr>
+                                <td align="center" background="https://github.com/odin9den/images/blob/main/coin_syndicate_bg.png?raw=true" bgcolor="0B1014" width="800" height="2098" style="background-position: center;background-size: cover;background-repeat: no-repeat;background-color: #0B1014;width: 800px; height: 2098px;">
+                                    <table class="responsive-container" cellpadding="0" cellspacing="0" border="0" width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td height="60"></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="130" align="left" valign="middle">
+                                                    <img src="coin_syndicate_logo_top.png" alt="main_logo" width="173" height="52" style="display:block" border="0">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="responsive-container" cellpadding="0" cellspacing="0" border="0" width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                        <tbody>
+                                            <tr>
+                                                <td height="35"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <table width="600" class="responsive-table">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td width="600">
+                                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td class="responsive-td">
+                                                                                                    <table cellpadding="0" cellspacing="0" border="0" width="600" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td class="main-title" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:32px; line-height:37px; font-weight:bold; color:#ffffff; opacity: 0.8;">
+                                                                                                                    <b>Your Coin Syndicate Registration was Successful!</b>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="12"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="600">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:bold; color:#80BFED;">
+                                                                                    <b>Welcome to the crypto influencer network of your dreams…</b>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="40"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="greatings" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-radius: 30px; background-color: rgba(255, 255, 255, 0.08);">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="520" style="padding-left: 20px; padding-right: 20px;">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td height="43"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="main-title" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:28px; line-height:37px; font-weight:bold; color:#80BFED;">
+                                                                                    <b>Hi #recipient:name#</b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="22"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff; opacity: 0.7;">
+                                                                                    First off, the entire team here at Coin Syndicate would like to thank you for your interest in our project – it really means a lot! <br><br>
+                                                                                    <b>Now, without further ado, let’s get down to business…</b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="right" style="margin-right: 10px;">
+                                                                                    <img src="coin_syndicate_mini_logo_part1.png" alt="image" width="71" height="44" style="display:block" border="0">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="520" style="padding-right: 20px;padding-left: 20px;">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="right">
+                                                                                    <img src="coin_syndicate_mini_logo_part2.png" alt="image" width="71" height="44" style="display:block" border="0">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="60"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="responsive-container" width="600">
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="responsive-td" valign="middle" align="center">
+                                                                    <table class="centered-img square-image" cellpadding="0" cellspacing="0" border="0" width="183" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="center">
+                                                                                    <img src="coin_syndicate_img1.png" alt="image" width="183" height="183" style="display:block; margin-right: 10px;" border="0">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="responsive-td" valign="top" align="right">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="387" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="title" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:22px; line-height:26px; font-weight:bold; color:#80BFED">
+                                                                                    <b>
+                                                                                        What is <br>
+                                                                                        Coin Syndicate?
+                                                                                    </b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="15"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    If you don’t already know, Coin Syndicate is the rapidly growing influencer network dedicated to endorsing crypto campaigns, and we’ve already onboarded over 400 influencers. <br><br>
+                                                                                    We also generated a reach of 170m+ followers in our first three days of operation – and have gained an average 10m+ followers a day since!
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="11"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="600" valign="top">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    At Coin Syndicate, we’re building an influencer launchpad for token sales and NFT integration that empowers any member to conduct token sales, promote in-house, third-party and personal project tokens, engage with clients in search of influencers, partake in adaptable affiliate programs and much, much more. <br><br>
+                                                                                    Our platform is going live very soon and early members will receive exclusive token allocations from our launchpad. <br><br>
+                                                                                    We’ve already partnered with Bybit and are in talks with Phemex, so you could say the future’s looking bright – and we’re only just getting started…
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="60"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="responsive-container" width="600">
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="responsive-td" valign="top" align="left">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="387" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="title" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:22px; line-height:26px; font-weight:bold; color:#80BFED">
+                                                                                    <b>
+                                                                                        How <br>
+                                                                                        does it work?
+                                                                                    </b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="15"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    The Coin Syndicate process couldn’t be simpler. We’ve built it to focus entirely around you, the influencer – because without you, where would we be? <br><br>
+                                                                                    All Coin Syndicate-partnered influencers receive regular emails filled with exclusive deals to capitalize upon and generate fantastic commission-based earnings. <br><br>
+                                                                                    When you sign a deal that’s too good to refuse, you’ll be transferred to a secure browser window where you can share your basic info. <br><br>
+                                                                                    Once you review and agree to the terms and conditions, we’ll send you an email containing your unique affiliate link, payment info and/or catalog inquiry.
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="responsive-td" valign="middle" align="center">
+                                                                    <table class="centered-img rectangle-image" cellpadding="0" cellspacing="0" border="0" width="183" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="center">
+                                                                                    <img src="coin_syndicate_img2.png" alt="image" width="183" height="290" style="display:block; margin-left: 10px;" border="0">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="15"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="600" valign="top">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    Then it’s up to you to do what you do best! Coin Syndicate will log all your reach performance metrics, provide many more resources for you to maximize your engagements – and be on hand to assist you whenever you might need it. <br><br>
+                                                                                    Finally, it’s time to reap the rewards! And by the looks of things, they’re going to be BIG!
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="60"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="responsive-container" width="600">
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="responsive-td" valign="middle" align="center">
+                                                                    <table class="centered-img square-image" cellpadding="0" cellspacing="0" border="0" width="183" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="center">
+                                                                                    <img src="coin_syndicate_img3.png" alt="image" width="183" height="183" style="display:block;margin-right: 10px;" border="0">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="responsive-td" valign="top" align="right">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="387" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="title" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:22px; line-height:26px; font-weight:bold; color:#80BFED">
+                                                                                    <b>
+                                                                                        When <br>
+                                                                                        are we launching?
+                                                                                    </b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="15"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    The first Coin Syndicate deal is going live very soon, and we couldn’t be more excited about our partner and their reputation. <br><br>
+                                                                                    Just keep an eye on your inbox to hear about our first deal and start transforming your career as a crypto influencer.
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="60"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="600" valign="top">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:bold; text-transform: uppercase; color:#80BFED;">
+                                                                                    <b>Once again, we thank you for your support and can’t wait to see how far you climb in the Coin Syndicate ecosystem.</b>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="responsive-container" width="600">
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="responsive-td">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="387" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:16px; font-weight:bold; color:#ffffff">
+                                                                                    <b>
+                                                                                        Best, <br>
+                                                                                        The Coin Syndicate Team
+                                                                                    </b>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="15">&nbsp;</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:14px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    If you no longer wish to receive these emails, just unsubscribe by clicking <a href="#unsubscribeLink#" target="_blank" rel="nofollow" style="color: #ffffff;text-decoration: none;">here</a>. We’d hate to see you go, though!
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="15">&nbsp;</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text" align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:14px; font-weight:normal; color:#ffffff;opacity: 0.7;">
+                                                                                    P.S. Join our telegram group for the latest info.
+                                                                                </td>
+                                                                                <td class="arrow" align="left" valign="top">
+                                                                                    <img src="coin_syndicate_arrow.png" alt="telegr" width="60" height="14" border="0" style="display:block">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="responsive-td" valign="bottom">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="128">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td height="40"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td width="22">
+                                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td align="center">
+                                                                                                    <a href="https://t.me/coinsyn" target="_blank" rel="nofollow">
+                                                                                                        <img src="coin_syndicate_telegram.png" alt="telegr" width="22" height="22" border="0" style="display:block">
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                                <!-- <td width="30">&nbsp;</td>
+                                                                                    <td width="24">
+                                                                                        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <a href="#" target="_blank" rel="nofollow">
+                                                                                                            <img src="coin_syndicate_twitter.png" alt="twitter" width="24" height="24" border="0" style="display:block">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                    <td width="30">&nbsp;</td>
+                                                                                    <td width="22">
+                                                                                        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px;">
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <a href="https://www.instagram.com/official_coinsyndicate/" target="_blank" rel="nofollow">
+                                                                                                            <img src="coin_syndicate_instagram.png" alt="instagr" width="22" height="22" border="0" style="display:block">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </td> -->
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="113"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- end padding table -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end wrapping table -->
+    </body>
+    </html>
